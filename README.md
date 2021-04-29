@@ -1,0 +1,2 @@
+# rails_firebase_auth_example
+rails_firebase_auth_example
