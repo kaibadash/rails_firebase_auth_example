@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import initFirebase from "./services/Firebase";
 import { withRouter } from 'react-router';
-import { useHistory, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 
 interface AppProps extends RouteComponentProps<{}> {
 }
