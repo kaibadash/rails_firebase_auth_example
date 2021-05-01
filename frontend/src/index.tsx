@@ -22,7 +22,7 @@ ReactDOM.render(
             <Link to="/login">login</Link>
           </li>
           <li>
-            <Link to="/singup">singup</Link>
+            <Link to="/signup">signup</Link>
           </li>
         </ul>
       </div>
@@ -30,7 +30,7 @@ ReactDOM.render(
         <Route exact path="/" component={App}></Route>
         <Route path="/messages" component={Messages}></Route>
         <Route path="/login" component={Login}></Route>
-        <Route path="/singup" component={SignUp}></Route>
+        <Route path="/signup" component={SignUp}></Route>
       </Switch>
     </Router>,
   document.getElementById("root")

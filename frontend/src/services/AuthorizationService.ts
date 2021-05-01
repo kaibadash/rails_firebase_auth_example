@@ -2,16 +2,17 @@ import axios from 'axios';
 
 export default class AuthorizationService {
     static async authrize(idToken: string) {
-        let response = await axios.post("/authorizations", {
-            id_token: idToken
-        });
-        if (response.status === 404) {
-            return false;
+        try {
+            let response = await axios.post("/authorizations", {
+                id_token: idToken
+            });
+        } catch (err) {
+            if (err.response.status === 404) {
+                return false;
+            }
+            throw err
         }
-        if (response.status !== 200) {
-            throw Error("authorization failed");
-        }
-        // TODO: save session
+        
         return true;
     }
 }

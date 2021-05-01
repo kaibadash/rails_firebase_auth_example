@@ -15,8 +15,13 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
+    @user = User.find_by_id_token(user_params[:id_token])
+    if @user.present?
+      session[:user_id] = @user.id # logged in
+      return render json: @user, status: :created, location: @user
+    end
 
+    @user = User.new(user_params)
     if @user.save
       render json: @user, status: :created, location: @user
     else
@@ -33,11 +38,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  def destroy
-    @user.destroy
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -47,6 +47,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :uid)
+    params.permit(:name, :uid, :id_token)
   end
 end
