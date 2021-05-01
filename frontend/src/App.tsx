@@ -1,16 +1,31 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import initFirebase from "./services/Firebase";
+import { withRouter } from 'react-router';
+import { useHistory, RouteComponentProps } from "react-router-dom";
 
-function App() {
-  initFirebase();
-  return (
-    <div className="App">
-      Home
-      <div id="firebaseui-auth-container"></div>
-      <div id="loader">Loading...</div>
-    </div>
-  );
+interface AppProps extends RouteComponentProps<{}> {
 }
 
-export default App;
+class App extends React.Component<AppProps> {
+  constructor(props: AppProps) {
+    super(props);
+    initFirebase();
+  }
+  
+  handleLogin = () => {
+    let props = this.props as AppProps;
+    props.history.push('/login')
+  }
+
+  render() {
+    return (
+      <div className="App">
+        Home
+        <button onClick={() => this.handleLogin()}>Login / Sign up</button>
+      </div>
+    );
+  }
+}
+
+export default withRouter(App);
