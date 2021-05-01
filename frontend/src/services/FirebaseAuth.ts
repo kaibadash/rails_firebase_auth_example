@@ -25,7 +25,7 @@ export default class FirebaseAuth {
     let ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start("#firebaseui-auth-container", {
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-      signInSuccessUrl: "http://localhost:3000/login",
+      signInSuccessUrl: "/login",
       callbacks: {
         signInFailure: (error) => {
           window.alert(error.message);
