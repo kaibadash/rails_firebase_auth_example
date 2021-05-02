@@ -39,7 +39,7 @@ class TokenValidator
     raise InvalidTokenError, 'Invalid auth_time' unless Time.zone.at(payload['auth_time']).past?
     raise InvalidTokenError, 'Invalid sub' if payload['sub'].empty?
 
-    payload
+    payload.deep_symbolize_keys
   rescue JWT::DecodeError => e
     Rails.logger.error e.message
     Rails.logger.error e.backtrace.join("\n")

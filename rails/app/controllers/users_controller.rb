@@ -18,11 +18,11 @@ class UsersController < ApplicationController
     @user = User.find_by_id_token(user_params[:id_token])
     if @user.present?
       session[:user_id] = @user.id # logged in
-      return render json: @user, status: :created, location: @user
+      return render json: @user, status: 200, location: @user
     end
 
-    @user = User.new(user_params)
-    if @user.save
+    @user = User.register(user_params)
+    if @user.present?
       render json: @user, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -45,8 +45,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  # FIXME: Railsがかってに user => の入れ子にしてくるので Unpermitted parameter: :user になる…
+  # {"id_token"=>"[FILTERED]", "name"=>"bob", "user"=>{"name"=>"bob"}}
   def user_params
+    if params[:id_token].present?
+      payload = TokenValidator.new(params[:id_token]).validate!
+      params[:uid] = payload[:user_id]
+    end
     params.permit(:name, :uid, :id_token)
   end
 end
