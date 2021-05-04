@@ -4,17 +4,25 @@ import { RouteComponentProps } from "react-router-dom";
 import AuthorizationService from "../services/AuthorizationService";
 import MessageService from "../services/MessageService";
 
+interface Message {
+  user: {
+    name: string;
+  };
+  body: string;
+}
+
 interface MessageState {
   user: {
     name: string;
   };
   message: string;
+  messages: Array<Message>
 }
 
 class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
   constructor(props: RouteComponentProps<{}>, state: MessageState) {
     super(props);
-    this.state = { user: { name: "" }, message: "" };
+    this.state = { user: { name: "" }, message: "", messages: [] };
   }
   
   async componentDidMount() {
@@ -22,6 +30,7 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
       this.setState({
         user: await AuthorizationService.authrizedUser(),
         message: "",
+        messages: await MessageService.getMessages()   
       });
     } catch (err) {
       if (err.response.status === 404) {
@@ -57,6 +66,19 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
             }}
           ></textarea>
           <button onClick={() => this.postMessage()}>Post</button>
+        </div>
+
+        <div>
+          <dl>
+          {this.state.messages.map((message) => {
+            return (
+              <>
+                <dt>{message.user.name}</dt>
+                <dd>{message.body}</dd>
+              </>
+            );
+          })}
+          </dl>
         </div>
       </div>
     );

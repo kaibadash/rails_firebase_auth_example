@@ -6,4 +6,8 @@ export default class MessageService {
             body: body
         });
     }
+    static async getMessages() {
+        let response = await axios.get("/api/messages")
+        return response.data;
+    }
 }

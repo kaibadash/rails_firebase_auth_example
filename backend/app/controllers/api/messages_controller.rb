@@ -3,14 +3,14 @@ class Api::MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
+    @messages = Message.all.eager_load(:user).order(id: :desc)
 
-    render json: @messages
+    render json: @messages.as_json(include: :user)
   end
 
   # GET /messages/1
   def show
-    render json: @message
+    render json: @message.as_json(include: :user)
   end
 
   # POST /messages
@@ -18,7 +18,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.save
-      render json: @message, status: :created
+      render json: @message.as_json(include: :user), status: :created
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::MessagesController < ApplicationController
   private
 
   def set_message
-    @message = Message.find(params[:id])
+    @message = Message.find(params[:id]).eager_load(:user)
   end
 
   def message_params
