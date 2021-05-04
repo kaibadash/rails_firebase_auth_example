@@ -37,7 +37,6 @@ export default class FirebaseAuth {
   async getIdToken(): Promise<string> {
     let user = await this.onAuthStateChangedAsync();
     let idToken = await user?.getIdToken();
-    console.log(idToken);
     return idToken ?? ""
   }
 

@@ -34,7 +34,7 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
         message: "",
       });
     } catch (err) {
-      if (err.response.status === 404) {
+      if (err.response.status === 401) {
         return this.props.history.push("/login");
       }
       alert(err);
