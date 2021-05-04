@@ -41,6 +41,10 @@ export default class FirebaseAuth {
     return idToken ?? ""
   }
 
+  async logout(): Promise<void> {
+    return firebase.auth().signOut();
+  }
+
   private async onAuthStateChangedAsync(): Promise<firebase.User | null> {
     return new Promise( (resolve, reject) => {
       firebase.auth().onAuthStateChanged( user => {

@@ -4,9 +4,10 @@ import "./index.css";
 import App from "./App";
 import Messages from "./pages/Messages";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./pages/Header";
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route exact path="/" component={App}></Route>
         <Route path="/messages" component={Messages}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/logout" component={Logout}></Route>
         <Route path="/signup" component={SignUp}></Route>
       </Switch>
     </Router>,

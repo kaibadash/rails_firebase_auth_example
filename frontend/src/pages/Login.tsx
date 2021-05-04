@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 import { RouteComponentProps } from "react-router-dom";
 import FirebaseAuth from "../services/FirebaseAuth";
 import AuthorizationService from "../services/AuthorizationService";
@@ -10,15 +10,15 @@ class Login extends React.Component<RouteComponentProps<{}>> {
     firebaseAuth.initializeFirebaseUI();
     let idToken = await firebaseAuth.getIdToken();
     if (idToken === "") {
-      return;
+      return;     
     }
     if (await AuthorizationService.authrize(idToken)) {
-      return this.props.history.push("/messages");
+      return this.props.history.push('/messages');
     }
-    return this.props.history.push("/signup");
+    return this.props.history.push('/signup');
   }
 
-  render() {
+  render() {    
     return (
       <div className="App">
         Login / Sign Up
