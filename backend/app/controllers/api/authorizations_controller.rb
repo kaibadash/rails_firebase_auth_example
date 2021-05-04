@@ -1,4 +1,4 @@
-class AuthorizationsController < ApplicationController
+class Api::AuthorizationsController < ApplicationController
   def create
     user = User.find_by_id_token(params[:id_token])
     if user.nil?

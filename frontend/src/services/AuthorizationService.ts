@@ -3,7 +3,7 @@ import axios from 'axios';
 export default class AuthorizationService {
     static async authrize(idToken: string) {
         try {
-            let response = await axios.post("/authorizations", {
+            let response = await axios.post("/api/authorizations", {
                 id_token: idToken
             });
         } catch (err) {
