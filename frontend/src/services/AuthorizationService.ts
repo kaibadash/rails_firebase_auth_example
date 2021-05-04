@@ -15,4 +15,8 @@ export default class AuthorizationService {
         
         return true;
     }
+
+    static async authrizedUser() {
+        return (await axios.get("/api/authorizations")).data;
+    }
 }

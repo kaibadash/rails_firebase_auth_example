@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :authorizations, only: :create
+    resources :authorizations, only: [:create, :index]
     resources :messages
     resources :users, except: :destroy
   end
