@@ -18,13 +18,13 @@ class Api::UsersController < ApplicationController
     @user = User.find_by_id_token(user_params[:id_token])
     if @user.present?
       session[:user_id] = @user.id # logged in
-      return render json: @user, status: 200, location: @user
+      return render json: @user, status: 200
     end
 
     @user = User.register(user_params)
     if @user.present?
       session[:user_id] = @user.id # logged in
-      render json: @user, status: :created, location: @user
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
