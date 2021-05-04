@@ -4,8 +4,9 @@ import { RouteComponentProps } from "react-router-dom";
 import AuthorizationService from "../services/AuthorizationService";
 import MessageService from "../services/MessageService";
 import Form from "../components/Form";
+import Message from "../components/Message";
 
-interface Message {
+interface IMessage {
   user: {
     name: string;
   };
@@ -18,7 +19,7 @@ interface MessageState {
     name: string;
   };
   message: string;
-  messages: Array<Message>;
+  messages: Array<IMessage>;
 }
 
 class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
@@ -58,14 +59,13 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
         ></Form>
         <div>
           <dl>
-            {this.state.messages.map((message) => {
-              return (
-                <div key={message.id}>
-                  <dt>{message.user.name}</dt>
-                  <dd>{message.body}</dd>
-                </div>
-              );
-            })}
+            { 
+              this.state.messages.map((message) => {
+                return (
+                  <Message key={message.id} name={message.user.name} message={message.body}></Message>
+                );
+              })
+            }
           </dl>
         </div>
       </div>

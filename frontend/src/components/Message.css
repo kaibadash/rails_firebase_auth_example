@@ -1,0 +1,16 @@
+.Message {
+  border: #ccc solid thin;
+  margin: 5px;
+  padding: 5px;
+}
+
+.Message dt {
+  font-weight: bold;
+  font-size: 1.2em;
+  
+}
+
+.Message dd {
+  margin: 0px;
+  padding: 5px;
+}

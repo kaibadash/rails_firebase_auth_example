@@ -1,5 +1,7 @@
 import React from "react";
 import MessageService from "../services/MessageService";
+import "./Form.css";
+import PositiveButton from "./PositiveButton";
 
 interface FormState {
   message: string;
@@ -38,14 +40,16 @@ class Form extends React.Component<FormProps, FormState> {
   render() {
     return (
       <div className="Form">
-        name: {this.props.name}
+        <div>{this.props.name}</div>
         <textarea
           value={this.state.message}
           onChange={(e) => {
             this.onChangeMessage(e);
           }}
         ></textarea>
-        <button onClick={() => this.postMessage()}>Post</button>
+        <div>
+        <PositiveButton onClick={() => this.postMessage()} label="Post"></PositiveButton>
+        </div>
       </div>
     );
   }
