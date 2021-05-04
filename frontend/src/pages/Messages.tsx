@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import AuthorizationService from "../services/AuthorizationService";
 import MessageService from "../services/MessageService";
-import Form from "./Form";
+import Form from "../components/Form";
 
 interface Message {
   user: {

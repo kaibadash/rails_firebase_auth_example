@@ -7,25 +7,11 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Header from "./pages/Header";
 
 ReactDOM.render(
     <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">home</Link>
-          </li>
-          <li>
-            <Link to="/messages">messages</Link>
-          </li>
-          <li>
-            <Link to="/login">login</Link>
-          </li>
-          <li>
-            <Link to="/signup">signup</Link>
-          </li>
-        </ul>
-      </div>
+      <Header></Header>
       <Switch>
         <Route exact path="/" component={App}></Route>
         <Route path="/messages" component={Messages}></Route>
