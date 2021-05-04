@@ -8,6 +8,7 @@ interface Message {
   user: {
     name: string;
   };
+  id: number,
   body: string;
 }
 
@@ -30,7 +31,6 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
       this.setState({
         user: await AuthorizationService.authrizedUser(),
         message: "",
-        messages: await MessageService.getMessages()   
       });
     } catch (err) {
       if (err.response.status === 404) {
@@ -38,6 +38,14 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
       }
       alert(err);
     }
+    this.reloadMessages();
+  }
+
+  async reloadMessages() {
+    let messages = await MessageService.getMessages();
+    this.setState({
+      messages: messages
+    });
   }
 
   onChangeMessage(e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -49,6 +57,10 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
   async postMessage() {
     try {
       await MessageService.post(this.state.message);
+      this.reloadMessages();
+      this.setState({
+        message: ""
+      });
     } catch (err) {
       alert(err);
     }
@@ -72,10 +84,10 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
           <dl>
           {this.state.messages.map((message) => {
             return (
-              <>
+              <div key={message.id}>
                 <dt>{message.user.name}</dt>
                 <dd>{message.body}</dd>
-              </>
+              </div>
             );
           })}
           </dl>
