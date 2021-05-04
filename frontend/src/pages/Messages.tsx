@@ -3,12 +3,13 @@ import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import AuthorizationService from "../services/AuthorizationService";
 import MessageService from "../services/MessageService";
+import Form from "./Form";
 
 interface Message {
   user: {
     name: string;
   };
-  id: number,
+  id: number;
   body: string;
 }
 
@@ -17,7 +18,7 @@ interface MessageState {
     name: string;
   };
   message: string;
-  messages: Array<Message>
+  messages: Array<Message>;
 }
 
 class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
@@ -25,7 +26,7 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
     super(props);
     this.state = { user: { name: "" }, message: "", messages: [] };
   }
-  
+
   async componentDidMount() {
     try {
       this.setState({
@@ -44,52 +45,27 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
   async reloadMessages() {
     let messages = await MessageService.getMessages();
     this.setState({
-      messages: messages
+      messages: messages,
     });
-  }
-
-  onChangeMessage(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({
-      message: e.currentTarget.value,
-    });
-  }
-
-  async postMessage() {
-    try {
-      await MessageService.post(this.state.message);
-      this.reloadMessages();
-      this.setState({
-        message: ""
-      });
-    } catch (err) {
-      alert(err);
-    }
   }
 
   render() {
     return (
       <div className="Messages">
-        <div>
-          name: {this.state?.user?.name}
-          <textarea
-            value={this.state.message}
-            onChange={(e) => {
-              this.onChangeMessage(e);
-            }}
-          ></textarea>
-          <button onClick={() => this.postMessage()}>Post</button>
-        </div>
-
+        <Form
+          name={this.state?.user?.name}
+          onPosted={this.reloadMessages.bind(this)}
+        ></Form>
         <div>
           <dl>
-          {this.state.messages.map((message) => {
-            return (
-              <div key={message.id}>
-                <dt>{message.user.name}</dt>
-                <dd>{message.body}</dd>
-              </div>
-            );
-          })}
+            {this.state.messages.map((message) => {
+              return (
+                <div key={message.id}>
+                  <dt>{message.user.name}</dt>
+                  <dd>{message.body}</dd>
+                </div>
+              );
+            })}
           </dl>
         </div>
       </div>
