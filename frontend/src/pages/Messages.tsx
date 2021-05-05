@@ -9,6 +9,7 @@ import Message from "../components/Message";
 interface IMessage {
   user: {
     name: string;
+    icon_url: string;
   };
   id: number;
   body: string;
@@ -62,7 +63,7 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
             { 
               this.state.messages.map((message) => {
                 return (
-                  <Message key={message.id} name={message.user.name} message={message.body}></Message>
+                  <Message key={message.id} name={message.user.name} iconUrl={message.user.icon_url} message={message.body}></Message>
                 );
               })
             }

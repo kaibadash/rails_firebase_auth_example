@@ -4,6 +4,7 @@ import "./Message.css";
 interface MessageProps {
   message: string;
   name: string;
+  iconUrl: string;
 }
 
 class Message extends React.Component<MessageProps, {}> {
@@ -20,7 +21,7 @@ class Message extends React.Component<MessageProps, {}> {
   render() {
     return (
       <div className="Message">
-        <dt>{this.props.name}</dt>
+        <dt><img src={this.props.iconUrl} alt="icon" />{this.props.name}</dt>
         <dd>{this.props.message}</dd>
       </div>
     );

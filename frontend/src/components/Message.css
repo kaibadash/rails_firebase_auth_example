@@ -7,7 +7,11 @@
 .Message dt {
   font-weight: bold;
   font-size: 1.2em;
-  
+}
+
+.Message dt img {
+  width: 50px;
+  height: 50px;
 }
 
 .Message dd {

@@ -53,7 +53,9 @@ class Api::UsersController < ApplicationController
     if params[:id_token].present?
       payload = TokenValidator.new(params[:id_token]).validate!
       params[:uid] = payload[:user_id]
+      params[:email] = payload[:email]
+      params[:icon_url] = payload[:picture]
     end
-    params.permit(:name, :uid, :id_token, :email)
+    params.permit(:name, :uid, :id_token, :email, :icon_url)
   end
 end

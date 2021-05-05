@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_04_29_125723) do
 
   create_table "messages", force: :cascade do |t|
-    t.string "body"
+    t.string "body", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 2021_04_29_125723) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "uid"
+    t.string "name", null: false
+    t.string "uid", null: false
+    t.string "email", null: false
+    t.string "icon_url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
