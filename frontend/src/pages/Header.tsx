@@ -6,7 +6,7 @@ class Header extends React.Component<{}> {
   render() {
     return (
       <div className="Header">
-        <h1>My BBS</h1>
+        <h1><a href="/">My BBS</a></h1>
         <ul>
           <li>
             <Link to="/">Home</Link>
