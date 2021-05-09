@@ -28,13 +28,13 @@ class Login extends React.Component<RouteComponentProps<{}>> {
     };
 
     const firebaseConfig = {
-      apiKey: "AIzaSyA0cqV8li43IUqCvmB19A8q6UOxhtZ8x6U",
-      authDomain: "rails-firebase-auth-example.firebaseapp.com",
-      projectId: "rails-firebase-auth-example",
-      storageBucket: "rails-firebase-auth-example.appspot.com",
-      messagingSenderId: "365350306449",
-      appId: "1:365350306449:web:9802f54f8e66673933f530",
-      measurementId: "G-3D2DZJ3C04",
+      apiKey: process.env.REACT_APP_API_KEY,
+      authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+      projectId: process.env.REACT_APP_PROJECT_ID,
+      storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+      messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+      appId: process.env.REACT_APP_APP_ID,
+      measurementId: process.env.REACT_APP_MEASUREMENT_ID,
     };
 
     if (!firebase.apps.length) {
