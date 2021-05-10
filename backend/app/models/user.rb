@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   def self.register(params)
     user = User.new(params)
+    if user.icon_url.blank?
+      user.icon_url = "https://dummyimage.com/100x100/000/0011ff"
+    end
     user.save!
     user
   end
