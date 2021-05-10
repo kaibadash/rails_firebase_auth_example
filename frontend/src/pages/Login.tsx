@@ -23,7 +23,8 @@ class Login extends React.Component<RouteComponentProps<{}>> {
     const uiConfig = {
       signInSuccessUrl: '/login',
       signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
       ],
     };
 
