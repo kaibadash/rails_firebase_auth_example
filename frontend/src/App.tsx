@@ -20,7 +20,10 @@ class App extends React.Component<AppProps> {
             <p>無性に書き込みたくなる文章をここに書く。</p>
           </div>
         </div>
-        <PositiveButton onClick={ this.handleLogin.bind(this)} label="Login / Sign up"></PositiveButton>
+        <PositiveButton
+          onClick={this.handleLogin}
+          label="Login / Sign up"
+        ></PositiveButton>
       </div>
     );
   }

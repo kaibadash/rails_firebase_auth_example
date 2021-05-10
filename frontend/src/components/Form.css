@@ -2,7 +2,7 @@
   padding: 5px;
 }
 
-.Form textarea {
+.message {
   display: block;
   width: 50%;
   padding: 3px;
@@ -11,7 +11,7 @@
   box-shadow: 0 0 0 1px #ccc inset;
 }
 
-.Form textarea:focus {
+.message textarea:focus {
   outline: 0;
   box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }

@@ -42,6 +42,7 @@ class Form extends React.Component<FormProps, FormState> {
       <div className="Form">
         <div>{this.props.name}</div>
         <textarea
+          className="message"
           value={this.state.message}
           onChange={(e) => {
             this.onChangeMessage(e);
