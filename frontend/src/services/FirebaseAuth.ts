@@ -10,6 +10,40 @@ export default class FirebaseAuth {
     return idToken ?? "";
   }
 
+  emailVerified(): boolean {
+    var user = firebase.auth().currentUser;
+    return user?.emailVerified === true
+  }
+
+  async sendEmailVerificationIfNeed() {
+    var user = firebase.auth().currentUser;
+    if (!user) return;
+    try {
+      await user.sendEmailVerification();
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  async sendPasswordReminder(email: string) {
+    var auth = firebase.auth();
+    try {
+      await auth.sendPasswordResetEmail(email);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  async resetPassword(newPassword: string) {
+    var user = firebase.auth().currentUser;
+    if (!user) return;
+    try {
+      await user.updatePassword(newPassword);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
   async logout(): Promise<void> {
     return firebase.auth().signOut();
   }
