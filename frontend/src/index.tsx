@@ -6,6 +6,7 @@ import Messages from "./pages/Messages";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
+import PasswordReminder from "./pages/PasswordReminder";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./pages/Header";
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route path="/login" component={Login}></Route>
         <Route path="/logout" component={Logout}></Route>
         <Route path="/signup" component={SignUp}></Route>
+        <Route path="/password_reminder" component={PasswordReminder}></Route>
       </Switch>
     </Router>,
   document.getElementById("root")

@@ -23,6 +23,9 @@ class Header extends React.Component<{}> {
           <li>
             <Link to="/logout">Logout</Link>
           </li>
+          <li>
+            <Link to="/password_reminder">Remind account</Link>
+          </li>
         </ul>
       </div>
     );
