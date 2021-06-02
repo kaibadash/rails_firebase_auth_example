@@ -1,7 +1,7 @@
 import React from "react";
-import { withRouter } from 'react-router';
+import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
-import firebase from 'firebase';
+import firebase from "firebase";
 import FirebaseAuth from "../services/FirebaseAuth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import AuthorizationService from "../services/AuthorizationService";
@@ -11,21 +11,35 @@ class Login extends React.Component<RouteComponentProps<{}>> {
     let firebaseAuth = new FirebaseAuth();
     let idToken = await firebaseAuth.getIdToken();
     if (idToken === "") {
-      return;     
+      return;
     }
+    if (!firebaseAuth.emailVerified()) {
+      await firebaseAuth.sendEmailVerificationIfNeed();
+      alert("メールアドレスの確認のメールを送信しました。");
+      return this.props.history.push("/signup");
+    }
+
     if (await AuthorizationService.authrize(idToken)) {
-      return this.props.history.push('/messages');
+      return this.props.history.push("/messages");
     }
-    return this.props.history.push('/signup');
+    return this.props.history.push("/signup");
   }
 
   render() {
     const uiConfig = {
-      signInSuccessUrl: '/login',
+      signInSuccessUrl: "/login",
       signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
+        {
+          provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        },
+        {
+          provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        },
+        {
+          provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          defaultCountry: "JA",
+          requireDisplayName: false,
+        }
       ],
     };
 
@@ -45,7 +59,10 @@ class Login extends React.Component<RouteComponentProps<{}>> {
 
     return (
       <div className="Login">
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
       </div>
     );
   }
