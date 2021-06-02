@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import Messages from "./pages/Messages";
 import Login from "./pages/Login";
+import EmailLogin from "./pages/EmailLogin";
 import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
 import PasswordReminder from "./pages/PasswordReminder";
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route exact path="/" component={App}></Route>
         <Route path="/messages" component={Messages}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/email_login" component={EmailLogin}></Route>
         <Route path="/logout" component={Logout}></Route>
         <Route path="/signup" component={SignUp}></Route>
         <Route path="/password_reminder" component={PasswordReminder}></Route>

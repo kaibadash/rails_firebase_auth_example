@@ -10,6 +10,11 @@ export default class FirebaseAuth {
     return idToken ?? "";
   }
 
+  async getIdTokenFromEmailLink(credential: firebase.auth.AuthCredential): Promise<string> {
+    let userCredential = await firebase.auth().currentUser?.linkWithCredential(credential)
+    return userCredential?.user?.getIdToken() ?? "";
+  }
+
   emailVerified(): boolean {
     var user = firebase.auth().currentUser;
     return user?.emailVerified === true
