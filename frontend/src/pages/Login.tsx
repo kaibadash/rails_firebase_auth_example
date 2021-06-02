@@ -35,11 +35,11 @@ class Login extends React.Component<RouteComponentProps<{}>> {
         {
           provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         },
-        {
-          provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          defaultCountry: "JA",
-          requireDisplayName: false,
-        }
+        // {
+        //   provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        //   defaultCountry: "JA",
+        //   requireDisplayName: false,
+        // }
       ],
     };
 
@@ -63,6 +63,7 @@ class Login extends React.Component<RouteComponentProps<{}>> {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
+        <a href="/email_login">Signin with email</a>
       </div>
     );
   }
