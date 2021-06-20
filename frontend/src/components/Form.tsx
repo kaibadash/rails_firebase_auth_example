@@ -1,6 +1,6 @@
 import React from "react";
 import MessageService from "../services/MessageService";
-import "./Form.css";
+import styles from "./Form.module.css";
 import PositiveButton from "./PositiveButton";
 
 interface FormState {
@@ -39,10 +39,10 @@ class Form extends React.Component<FormProps, FormState> {
 
   render() {
     return (
-      <div className="Form">
+      <div className={styles.Form}>
         <div>{this.props.name}</div>
         <textarea
-          className="message"
+          className={styles.message}
           value={this.state.message}
           onChange={(e) => {
             this.onChangeMessage(e);

@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import PositiveButton from "./components/PositiveButton";
@@ -13,8 +13,8 @@ class App extends React.Component<AppProps> {
 
   render() {
     return (
-      <div className="App">
-        <div className="topContainer">
+      <div className={styles.App}>
+        <div className={styles.topContainer}>
           <div>
             <h2>My BBSにようこそ！</h2>
             <p>無性に書き込みたくなる文章をここに書く。</p>

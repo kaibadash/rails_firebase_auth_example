@@ -1,5 +1,5 @@
 import React from "react";
-import "./PositiveButton.css";
+import styles from "./PositiveButton.module.css";
 
 interface ButtonProps {
   label: string;
@@ -13,7 +13,7 @@ class PositiveButton extends React.Component<ButtonProps, {}> {
 
   render() {
     return (
-      <button className="PositiveButton" onClick={() => this.props.onClick()}>
+      <button className={styles.PositiveButton} onClick={() => this.props.onClick()}>
         {this.props.label}
       </button>
     );

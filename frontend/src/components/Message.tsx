@@ -1,5 +1,5 @@
 import React from "react";
-import "./Message.css";
+import styles from "./Message.module.css";
 
 interface MessageProps {
   message: string;
@@ -20,7 +20,7 @@ class Message extends React.Component<MessageProps, {}> {
 
   render() {
     return (
-      <div className="Message">
+      <div className={styles.Message}>
         <dt><img src={this.props.iconUrl} alt="icon" />{this.props.name}</dt>
         <dd>{this.props.message}</dd>
       </div>
