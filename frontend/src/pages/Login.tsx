@@ -5,6 +5,7 @@ import firebase from "firebase";
 import FirebaseAuth from "../services/FirebaseAuth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import AuthorizationService from "../services/AuthorizationService";
+import styles from "./Login.module.css";
 
 class Login extends React.Component<RouteComponentProps<{}>> {
   async componentDidMount() {
@@ -35,6 +36,7 @@ class Login extends React.Component<RouteComponentProps<{}>> {
         {
           provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         },
+        // パスワード認証の地獄への道を行きたいものだけ有効にしなさい
         // {
         //   provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         //   defaultCountry: "JA",
@@ -58,12 +60,16 @@ class Login extends React.Component<RouteComponentProps<{}>> {
     }
 
     return (
-      <div className="Login">
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-        <a href="/email_login">Signin with email</a>
+      <div className={styles.Login}>
+        <div className={styles.SnsLogin}>
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
+        </div>
+        <div className={styles.EmailLogin}>
+          <a href="/email_login">Signin with email</a>
+        </div>
       </div>
     );
   }
