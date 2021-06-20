@@ -5,6 +5,7 @@ import firebase from "firebase";
 import FirebaseAuth from "../services/FirebaseAuth";
 import AuthorizationService from "../services/AuthorizationService";
 import PositiveButton from "../components/PositiveButton";
+import styles from "./EmailLogin.module.css";
 
 export interface LoginState extends StaticContext {
   email: string;
@@ -15,38 +16,44 @@ class EmailLogin extends React.Component<RouteComponentProps<{}>, LoginState> {
     super(props);
     this.state = { email: "" };
   }
-  
+
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ email: event.target.value });
   }
 
   sendEmail() {
     let actionCodeSettings = {
-      url: 'http://localhost:3000/email_login',
-      handleCodeInApp: true
+      url: "http://localhost:3000/email_login",
+      handleCodeInApp: true,
     };
-    firebase.auth().sendSignInLinkToEmail(this.state.email, actionCodeSettings).then(() => {
-      window.localStorage.setItem('emailForSignIn', this.state.email);
-      alert("メールを送りました。");
-    }).catch((error) => {
-      alert(error); 
-    });
+    firebase
+      .auth()
+      .sendSignInLinkToEmail(this.state.email, actionCodeSettings)
+      .then(() => {
+        window.localStorage.setItem("emailForSignIn", this.state.email);
+        alert("メールを送りました。");
+      })
+      .catch((error) => {
+        alert(error);
+      });
   }
 
   async checkLoggedIn() {
     if (!firebase.auth().isSignInWithEmailLink(window.location.href)) {
       return;
     }
-    let email = window.localStorage.getItem('emailForSignIn');
+    let email = window.localStorage.getItem("emailForSignIn");
     if (!email) {
-      email = window.prompt('Please provide your email for confirmation');
+      email = window.prompt("Please provide your email for confirmation");
     }
     if (!email) {
       return;
     }
-    let userCredential = await firebase.auth().signInWithEmailLink(email, window.location.href);
-    let idToken = await userCredential.user?.getIdToken() ?? "";
-    window.localStorage.removeItem('emailForSignIn');
+    let userCredential = await firebase
+      .auth()
+      .signInWithEmailLink(email, window.location.href);
+    let idToken = (await userCredential.user?.getIdToken()) ?? "";
+    window.localStorage.removeItem("emailForSignIn");
     if (idToken === "") {
       return;
     }
@@ -76,15 +83,18 @@ class EmailLogin extends React.Component<RouteComponentProps<{}>, LoginState> {
     }
 
     return (
-      <div className="Login">
-        <input
-          type="text"
-          value={this.state.email}
-          onChange={(e) => {
-            this.handleChange(e);
-          }}
-          placeholder="メールアドレス"
-        ></input>
+      <div className={styles.EmailLogin}>
+        <h2>メールアドレスでログイン</h2>
+        <div>
+          <input
+            type="text"
+            value={this.state.email}
+            onChange={(e) => {
+              this.handleChange(e);
+            }}
+            placeholder="メールアドレス"
+          ></input>
+        </div>
         <PositiveButton
           onClick={() => {
             this.sendEmail();

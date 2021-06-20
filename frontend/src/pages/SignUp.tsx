@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import FirebaseAuth from "../services/FirebaseAuth";
 import SignUpService from "../services/SignUpService";
 import PositiveButton from "../components/PositiveButton";
+import styles from "./SignUp.module.css";
 
 export interface SignUpState extends StaticContext {
   name: string;
@@ -36,8 +37,8 @@ class SignUp extends React.Component<RouteComponentProps<{}>, SignUpState> {
 
   render() {
     return (
-      <div>
-        <p>Sign Up</p>
+      <div className={styles.SignUp}>
+        <h2>Sign Up</h2>
         <input
           type="text"
           value={this.state.name}
