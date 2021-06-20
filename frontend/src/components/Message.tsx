@@ -21,8 +21,8 @@ class Message extends React.Component<MessageProps, {}> {
   render() {
     return (
       <div className={styles.Message}>
-        <dt><img src={this.props.iconUrl} alt="icon" />{this.props.name}</dt>
-        <dd>{this.props.message}</dd>
+        <dt className={styles.Name}><img className={styles.Icon} src={this.props.iconUrl} alt="icon" />{this.props.name}</dt>
+        <dd className={styles.MessageBody}>{this.props.message}</dd>
       </div>
     );
   }

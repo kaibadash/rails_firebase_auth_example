@@ -64,7 +64,9 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
             { 
               this.state.messages.map((message) => {
                 return (
-                  <Message key={message.id} name={message.user.name} iconUrl={message.user.icon_url} message={message.body}></Message>
+                  <div className={styles.MessageContainer}>
+                    <Message key={message.id} name={message.user.name} iconUrl={message.user.icon_url} message={message.body}></Message>
+                  </div>
                 );
               })
             }
