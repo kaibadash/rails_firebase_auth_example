@@ -31,6 +31,11 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
   }
 
   async componentDidMount() {
+    await this.authorize();
+    await this.reloadMessages();
+  }
+
+  async authorize() {
     try {
       this.setState({
         user: await AuthorizationService.authrizedUser(),
@@ -42,7 +47,6 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
       }
       alert(err);
     }
-    this.reloadMessages();
   }
 
   async reloadMessages() {
@@ -63,15 +67,18 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
         ></Form>
         <div>
           <dl>
-            { 
-              this.state.messages.map((message) => {
-                return (
-                  <div className={styles.MessageContainer}>
-                    <Message key={message.id} name={message.user.name} iconUrl={message.user.icon_url} message={message.body}></Message>
-                  </div>
-                );
-              })
-            }
+            {this.state.messages.map((message) => {
+              return (
+                <div className={styles.MessageContainer}>
+                  <Message
+                    key={message.id}
+                    name={message.user.name}
+                    iconUrl={message.user.icon_url}
+                    message={message.body}
+                  ></Message>
+                </div>
+              );
+            })}
           </dl>
         </div>
       </div>
