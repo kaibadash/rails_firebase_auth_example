@@ -17,6 +17,11 @@ yarn start
 
 ```bash
 cd backend
+cp .env.sample .env
+
+# edit .env
+# vi .env
+
 bundle exec rails db:reset db:create db:migrate
 bundle install
 bundle exec rails s
