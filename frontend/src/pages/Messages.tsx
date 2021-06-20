@@ -52,12 +52,14 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
     });
   }
 
+  handleOnPosted = this.reloadMessages.bind(this);
+
   render() {
     return (
       <div className={styles.Messages}>
         <Form
           name={this.state?.user?.name}
-          onPosted={this.reloadMessages.bind(this)}
+          onPosted={this.handleOnPosted}
         ></Form>
         <div>
           <dl>
