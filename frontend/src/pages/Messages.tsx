@@ -5,6 +5,7 @@ import AuthorizationService from "../services/AuthorizationService";
 import MessageService from "../services/MessageService";
 import Form from "../components/Form";
 import Message from "../components/Message";
+import styles from "./Messages.module.css";
 
 interface IMessage {
   user: {
@@ -53,7 +54,7 @@ class Messages extends React.Component<RouteComponentProps<{}>, MessageState> {
 
   render() {
     return (
-      <div className="Messages">
+      <div className={styles.Messages}>
         <Form
           name={this.state?.user?.name}
           onPosted={this.reloadMessages.bind(this)}
