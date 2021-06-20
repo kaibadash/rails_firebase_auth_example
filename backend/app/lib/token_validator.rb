@@ -8,11 +8,11 @@
 class TokenValidator
   class InvalidTokenError < StandardError; end
 
-  ALG = "RS256"
-  CERTS_URI = "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com"
-  CERTS_CACHE_KEY = "firebase_auth_certificates"
-  PROJECT_ID = ENV.fetch("FIREBASE_PROJECT_ID") { "rails-firebase-auth-example" }
-  ISSUER_URI_BASE = "https://securetoken.google.com/"
+  ALG = 'RS256'
+  CERTS_URI = 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com'
+  CERTS_CACHE_KEY = 'firebase_auth_certificates'
+  PROJECT_ID = ENV.fetch('FIREBASE_PROJECT_ID') { 'rails-firebase-auth-example' }
+  ISSUER_URI_BASE = 'https://securetoken.google.com/'
 
   def initialize(token)
     @token = token
@@ -32,12 +32,12 @@ class TokenValidator
       verify_iat: true
     }
     payload, = JWT.decode(@token, nil, true, options) do |header|
-      cert = fetch_certificates[header["kid"]]
+      cert = fetch_certificates[header['kid']]
       OpenSSL::X509::Certificate.new(cert).public_key if cert.present?
     end
 
-    raise InvalidTokenError, "Invalid auth_time" unless Time.zone.at(payload["auth_time"]).past?
-    raise InvalidTokenError, "Invalid sub" if payload["sub"].empty?
+    raise InvalidTokenError, 'Invalid auth_time' unless Time.zone.at(payload['auth_time']).past?
+    raise InvalidTokenError, 'Invalid sub' if payload['sub'].empty?
 
     payload.deep_symbolize_keys
   rescue JWT::DecodeError => e
@@ -54,10 +54,10 @@ class TokenValidator
     return cached if cached.present?
 
     res = Net::HTTP.get_response(URI(CERTS_URI))
-    raise "Fetch certificates error" unless res.is_a?(Net::HTTPSuccess)
+    raise 'Fetch certificates error' unless res.is_a?(Net::HTTPSuccess)
 
     body = JSON.parse(res.body)
-    expires_at = Time.zone.parse(res.header["expires"])
+    expires_at = Time.zone.parse(res.header['expires'])
     Rails.cache.write(CERTS_CACHE_KEY, body, expires_in: expires_at - Time.current)
 
     body

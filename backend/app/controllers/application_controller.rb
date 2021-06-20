@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   def signed_in!
     unless session[:user_id]
-      render json: { message: "unauthorized" }, status: 401
+      render json: { message: 'unauthorized' }, status: 401
       return
     end
     @user = User.find_by_id!(session[:user_id])
