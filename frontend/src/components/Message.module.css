@@ -1,0 +1,19 @@
+.Message {
+  border: #ccc solid thin;
+  padding: 5px;
+}
+
+.Name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.Icon {
+  width: 50px;
+  height: 50px;
+}
+
+.MessageBody {
+  margin: 0px;
+  padding: 5px;
+}

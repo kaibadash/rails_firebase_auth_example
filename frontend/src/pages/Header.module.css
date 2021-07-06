@@ -1,0 +1,30 @@
+.Header {
+  background-color: #ddd;
+  color: #333;
+  padding: 10px;
+}
+
+h1 {
+  size: 2em;
+  margin: 0px;
+  padding-bottom: 10px;
+}
+
+.Header ul {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+}
+
+.Header ul li {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  display: block;
+  margin-right: 5px;
+}
+
+.Header a {
+  text-decoration: none;
+  color: #333;
+}
