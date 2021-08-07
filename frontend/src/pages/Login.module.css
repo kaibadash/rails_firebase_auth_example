@@ -1,0 +1,13 @@
+.Login {
+  display: flex;
+  flex-flow: column;
+}
+
+.SnsLogin {
+  flex-flow: column;
+}
+
+.EmailLogin {
+  flex-flow: column;
+  text-align: center;
+}
